@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Vietnam Airlines NEO - AI UX Review</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+<style>
+body{font-family:Arial;margin:30px;background:#f4f6f9}
+.container{max-width:1400px;margin:auto;background:white;padding:30px;border-radius:12px}
+h1,h2{color:#0f3d91}
+table{border-collapse:collapse;width:100%}
+td,th{border:1px solid #ddd;padding:10px}
+th{background:#e8efff}
+.note{background:#eef6ff;padding:15px;border-left:5px solid #2563eb}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>WORKSHOP AI PRODUCT REVIEW – VIETNAM AIRLINES NEO</h1>
+
+<h2>1. Bài toán</h2>
+<p>User hỏi: "Tôi muốn thông tin về chuyến bay từ Nội Bài đến Tân Sơn Nhất ngày 04/06".</p>
+
+<h2>2. Kỳ vọng vs Thực tế</h2>
+<table>
+<tr><th>Kỳ vọng</th><th>Thực tế</th></tr>
+<tr>
+<td>AI trả về chuyến bay, giờ bay, giá vé hoặc hỏi làm rõ.</td>
+<td>AI chỉ gửi link website đặt vé.</td>
+</tr>
+</table>
+
+<h2>3. Flow hiện tại (AS-IS)</h2>
+<div class="mermaid">
+flowchart TD
+A[User hỏi lịch bay] --> B[NEO nhận diện intent]
+B --> C[Hiểu đúng yêu cầu]
+C --> D[Không kết nối Flight API]
+D --> E[Fallback Template]
+E --> F[Gửi link website]
+F --> G[User phải tự tìm lại]
+G --> H[Trải nghiệm kém]
+</div>
+
+<h2>4. Đánh giá UX AI</h2>
+<table>
+<tr><th>Tiêu chí</th><th>Điểm</th><th>Nhận xét</th></tr>
+<tr><td>Hiểu ý định</td><td>8/10</td><td>Hiểu đúng tuyến bay và ngày.</td></tr>
+<tr><td>Hoàn thành tác vụ</td><td>2/10</td><td>Không cung cấp thông tin chuyến bay.</td></tr>
+<tr><td>Giảm số bước</td><td>1/10</td><td>Bắt user tự thao tác lại trên website.</td></tr>
+<tr><td>Trải nghiệm AI</td><td>3/10</td><td>Giống công cụ chuyển hướng hơn là trợ lý AI.</td></tr>
+</table>
+
+<h2>5. Path yếu nhất</h2>
+<div class="note">
+Intent được nhận diện chính xác nhưng không có Action Layer để thực thi truy vấn dữ liệu chuyến bay.
+</div>
+
+<div class="mermaid">
+flowchart LR
+A[Intent Detection] --> B[No API Connection]
+B --> C[Fallback Response]
+C --> D[Website Link]
+D --> E[Task Failure]
+</div>
+
+<h2>6. Root Cause Analysis</h2>
+<ul>
+<li>Không tích hợp Flight Search API.</li>
+<li>Không có cơ chế RAG truy xuất dữ liệu chuyến bay.</li>
+<li>Không có bước hỏi lại khi thiếu thông tin.</li>
+<li>Fallback được kích hoạt quá sớm.</li>
+</ul>
+
+<h2>7. Flow đề xuất (TO-BE)</h2>
+
+<div class="mermaid">
+flowchart TD
+A[User hỏi lịch bay] --> B[Intent Detection]
+B --> C{Confidence > 90%}
+C -->|Yes| D[Flight Search API]
+D --> E[Lấy dữ liệu chuyến bay]
+E --> F[LLM tổng hợp kết quả]
+F --> G[Hiển thị chuyến bay]
+G --> H[Đặt vé ngay]
+
+C -->|No| I[AI hỏi lại]
+I --> D
+</div>
+
+<h2>8. Ví dụ câu trả lời nên có</h2>
+<div class="note">
+✈ VN215: 08:00 → 10:10<br>
+✈ VN225: 13:00 → 15:10<br>
+✈ VN245: 18:30 → 20:40<br><br>
+Bạn muốn xem vé rẻ nhất hay chuyến bay sớm nhất?
+</div>
+
+<h2>9. KPI sau cải tiến</h2>
+<table>
+<tr><th>KPI</th><th>Hiện tại</th><th>Mục tiêu</th></tr>
+<tr><td>Task Completion Rate</td><td>40%</td><td>85%</td></tr>
+<tr><td>User Satisfaction</td><td>3.0/5</td><td>4.5/5</td></tr>
+<tr><td>Website Redirect Rate</td><td>90%</td><td>30%</td></tr>
+<tr><td>Booking Conversion</td><td>Thấp</td><td>Tăng mạnh</td></tr>
+</table>
+
+<h2>10. Product Decision</h2>
+<div class="note">
+Ưu tiên số 1: Tích hợp Flight Search API cho NEO để chatbot có thể hoàn thành nhiệm vụ tìm chuyến bay thay vì chỉ gửi link.
+</div>
+
+</div>
+</body>
+</html>
