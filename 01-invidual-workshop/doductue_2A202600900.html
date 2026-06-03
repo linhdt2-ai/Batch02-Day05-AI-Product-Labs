@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Báo cáo Product Review - V-AI</title>
+  <style>
+    :root {
+      --blue: #2654d9;
+      --teal: #00796b;
+      --text: #151827;
+      --muted: #6d7488;
+      --line: #e9ecf3;
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --warn: #fff3ed;
+      --danger: #d93645;
+      --success: #1e8e3e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #ffffff, #eef4ff);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 12px 30px rgba(21,24,39,.06);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #eaf0ff;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 18px 0 8px; font-size: 34px; line-height: 1.18; }
+    h2 { margin: 0 0 16px; font-size: 24px; }
+    h3 { margin: 0 0 10px; font-size: 18px; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 22px rgba(21,24,39,.04);
+    }
+    .selected { border-top: 5px solid var(--teal); }
+    .section { margin-top: 28px; }
+    .tag {
+      display: inline-block;
+      color: var(--blue);
+      background: #eef3ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .query {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+    .label { font-weight: 800; color: var(--blue); }
+    .status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-left: 8px;
+    }
+    .happy { background: #eaf7ee; color: var(--success); }
+    .low { background: #fff8db; color: #8a6400; }
+    .fail { background: #ffecef; color: var(--danger); }
+    .flow {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #111827;
+      color: #f8fafc;
+      border-radius: 14px;
+      padding: 22px;
+      overflow-x: auto;
+      white-space: pre;
+      font-size: 14px;
+    }
+    .decision {
+      border-left: 5px solid var(--danger);
+      background: var(--warn);
+      padding: 20px 22px;
+      border-radius: 12px;
+      font-size: 18px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    ul { margin-top: 8px; padding-left: 20px; }
+    li { margin: 6px 0; }
+    footer {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (max-width: 820px) {
+      .grid, .two-col { grid-template-columns: 1fr; }
+      .query { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <span class="eyebrow">Product Review trong 40 phút</span>
+      <h1>Báo cáo đánh giá V-AI trong V-App</h1>
+      <p class="muted">Mục tiêu: thử một trợ lý AI trong app, tìm điểm người dùng bị kẹt, vẽ flow hiện tại và đề xuất một cải tiến sản phẩm rõ ràng.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>App được chọn</h3>
+          <p><strong>V-AI</strong></p>
+          <p class="muted">Trợ lý ảo voice/text, gợi ý theo context trong app.</p>
+        </div>
+        <div class="card">
+          <h3>Phạm vi thử</h3>
+          <p>2–3 câu hỏi thực tế của người dùng.</p>
+          <p class="muted">Không tập trung vào bug nhỏ lẻ.</p>
+        </div>
+        <div class="card selected">
+          <h3>Output cuối</h3>
+          <p>Sketch as-is / to-be + 1 câu product decision.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <span class="tag">1 · Dùng thử</span>
+      <h2>Promise và kỳ vọng</h2>
+      <p><strong>Promise:</strong> V-AI là trợ lý AI bằng giọng nói hoặc văn bản, có thể hiểu ngữ cảnh trong app và gợi ý hành động phù hợp.</p>
+      <p><strong>Kỳ vọng của người dùng:</strong> khi gặp vấn đề trong app, người dùng có thể hỏi bằng ngôn ngữ tự nhiên và được dẫn tới đúng thao tác, thay vì phải tự tìm trong nhiều menu.</p>
+
+      <div class="query">
+        <div class="label">Query 1</div>
+        <div>
+          <p><strong>“Tôi muốn đổi mật khẩu.”</strong> <span class="status happy">Happy path</span></p>
+          <p><strong>Kỳ vọng:</strong> AI mở đúng màn hình đổi mật khẩu hoặc hướng dẫn từng bước.</p>
+          <p><strong>Thực tế:</strong> AI có thể hiểu đúng intent vì câu hỏi rõ ràng và tác vụ phổ biến.</p>
+        </div>
+      </div>
+
+      <div class="query">
+        <div class="label">Query 2</div>
+        <div>
+          <p><strong>“Tôi không đăng nhập được.”</strong> <span class="status low">Low confidence</span></p>
+          <p><strong>Kỳ vọng:</strong> AI hỏi thêm để biết người dùng quên mật khẩu, sai OTP, tài khoản bị khóa hay đổi số điện thoại.</p>
+          <p><strong>Thực tế:</strong> nếu AI chỉ trả lời chung chung như “kiểm tra lại thông tin đăng nhập”, người dùng vẫn không biết bước tiếp theo.</p>
+        </div>
+      </div>
+
+      <div class="query">
+        <div class="label">Query 3</div>
+        <div>
+          <p><strong>“Tôi vừa bấm nhầm xác nhận, có hủy được không?”</strong> <span class="status fail">Failure</span></p>
+          <p><strong>Kỳ vọng:</strong> AI nhận ra đây là tình huống rủi ro, kiểm tra ngữ cảnh thao tác gần nhất và đưa ra lựa chọn an toàn.</p>
+          <p><strong>Thực tế:</strong> nếu AI không hiểu ngữ cảnh hoặc trả FAQ chung, người dùng dễ hoang mang và mất niềm tin.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section two-col">
+      <div class="card">
+        <span class="tag">2 · As-Is Flow</span>
+        <h2>Flow hiện tại</h2>
+        <div class="flow">User nhập câu hỏi
+        ↓
+V-AI phân tích intent
+        ↓
+AI trả lời trực tiếp
+        ↓
+┌────────────────────┬────────────────────┬────────────────────┐
+│ Happy path         │ Low confidence      │ Failure            │
+│ Câu hỏi rõ ràng    │ Câu hỏi mơ hồ       │ Câu hỏi rủi ro      │
+└────────────────────┴────────────────────┴────────────────────┘
+        ↓                    ↓                    ↓
+Mở đúng màn hình     Trả lời chung chung   Không hiểu ngữ cảnh
+        ↓                    ↓                    ↓
+Hoàn thành           User hỏi lại          User bỏ cuộc / cần hỗ trợ</div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Điểm kẹt</span>
+        <h2>Path yếu nhất</h2>
+        <p>Path yếu nhất là trường hợp <strong>low confidence</strong>, đặc biệt với câu “Tôi không đăng nhập được”.</p>
+        <p>Lý do: câu này có nhiều nguyên nhân khác nhau, nhưng nếu AI trả lời ngay bằng một hướng dẫn chung, người dùng không được dẫn tới đúng flow.</p>
+        <ul>
+          <li>Người dùng không biết mình thuộc trường hợp nào.</li>
+          <li>AI không tận dụng context để hỏi tiếp.</li>
+          <li>Trải nghiệm bị kéo dài và dễ dẫn tới bỏ cuộc.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section card">
+      <span class="tag">3 · To-Be Flow</span>
+      <h2>Đề xuất sửa path yếu nhất</h2>
+      <p>Thay vì trả lời tự do khi không chắc, V-AI nên chuyển sang flow làm rõ bằng quick actions.</p>
+      <div class="flow">User: “Tôi không đăng nhập được”
+        ↓
+V-AI nhận diện intent: Login issue
+        ↓
+AI thấy intent còn mơ hồ
+        ↓
+Hỏi làm rõ bằng quick actions:
+
+Bạn đang gặp vấn đề nào?
+[Quên mật khẩu]
+[Sai OTP]
+[Tài khoản bị khóa]
+[Đổi/mất số điện thoại]
+[Khác - gặp nhân viên hỗ trợ]
+        ↓
+User chọn một option
+        ↓
+V-AI mở đúng flow xử lý
+        ↓
+Nếu vẫn lỗi sau 2 lần → handoff sang hỗ trợ thật
+        ↓
+Ghi correction log để cải thiện intent lần sau</div>
+    </section>
+
+    <section class="section card">
+      <span class="tag">Product Decision</span>
+      <div class="decision">
+        <strong>Khi V-AI gặp intent mơ hồ hoặc có nhiều nguyên nhân khả dĩ, AI không được trả lời chung chung mà phải hỏi làm rõ bằng quick actions trước khi hướng dẫn tiếp.</strong>
+      </div>
+      <p style="margin-top:16px"><strong>Tác động kỳ vọng:</strong> giảm trả lời sai, giảm số lần user phải hỏi lại, tăng khả năng hoàn thành tác vụ trong app và tăng niềm tin vào trợ lý AI.</p>
+    </section>
+
+    <footer>
+      Báo cáo tập trung vào một path sản phẩm yếu nhất, không liệt kê bug rời rạc.
+    </footer>
+  </main>
+</body>
+</html>
